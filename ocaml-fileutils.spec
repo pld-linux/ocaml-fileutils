@@ -1,4 +1,3 @@
-# $Revision: 1.5 $, $Date: 2011/07/23 06:35:45 $
 Summary:	OCaml functions to manipulate real file (POSIX like) and filename
 Summary(pl.UTF-8):	Funkcje OCamla do operacji na (posiksowych) plikach oraz nazwach plików
 Name:		ocaml-fileutils
