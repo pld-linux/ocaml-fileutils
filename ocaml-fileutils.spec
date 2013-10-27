@@ -5,12 +5,12 @@
 Summary:	OCaml functions to manipulate real file (POSIX like) and filename
 Summary(pl.UTF-8):	Funkcje OCamla do operacji na (posiksowych) plikach oraz nazwach plików
 Name:		ocaml-fileutils
-Version:	0.4.4
-Release:	3
+Version:	0.4.5
+Release:	1
 License:	LGPL v2.1+ with OCaml linking exception
 Group:		Libraries
-Source0:	http://forge.ocamlcore.org/frs/download.php/892/%{name}-%{version}.tar.gz
-# Source0-md5:	1f43b9333358f47660318bfbe9ae68bf
+Source0:	http://forge.ocamlcore.org/frs/download.php/1194/%{name}-%{version}.tar.gz
+# Source0-md5:	2fa2782374c2210f2584fe02814bb343
 URL:		http://forge.ocamlcore.org/projects/ocaml-fileutils
 BuildRequires:	ocaml >= 3.04-7
 BuildRequires:	ocaml-findlib
@@ -25,13 +25,18 @@ Functions to manipulate real file (POSIX like) and filename.
 Funkcje do operacji na (posiksowych) plikach oraz nazwach plików.
 
 %package devel
-Summary:	Development files for %{name}
+Summary:	Development files for OCaml fileutils package
+Summary(pl.UTF-8):	Pliki programistyczne pakietu fileutils dla OCamla
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-The %{name}-devel package contains libraries and signature files for
-developing applications that use %{name}.
+This package contains libraries and signature files for developing
+applications that use OCaml fileutils package.
+
+%description devel -l pl.UTF-8
+Ten pakiet zawiera biblioteki i pliki sygnatur do tworzenia aplikacji
+wykorzystujących pakiet OCamla fileutils.
 
 %prep
 %setup -q
@@ -65,14 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS.txt CHANGELOG.txt README.txt TODO.txt
 %dir %{_libdir}/ocaml/fileutils
-%{_libdir}/ocaml/fileutils/*.cm*
-%if %{with opt}
-%exclude %{_libdir}/ocaml/fileutils/*.a
-%exclude %{_libdir}/ocaml/fileutils/*.cmx
-%exclude %{_libdir}/ocaml/fileutils/*.cmxa
-%endif
-%exclude %{_libdir}/ocaml/fileutils/*.ml
-%exclude %{_libdir}/ocaml/fileutils/*.mli
+%{_libdir}/ocaml/fileutils/*.cm[ai]
 %{_libdir}/ocaml/site-lib/fileutils
 
 %files devel
@@ -80,7 +78,8 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with opt}
 %{_libdir}/ocaml/fileutils/*.a
 %{_libdir}/ocaml/fileutils/*.cmx
-%{_libdir}/ocaml/fileutils/*.cmxa
+%{_libdir}/ocaml/fileutils/*.cmx[as]
 %endif
+# doc?
 %{_libdir}/ocaml/fileutils/*.ml
 %{_libdir}/ocaml/fileutils/*.mli
