@@ -1,15 +1,15 @@
 #
 # Conditional build:
-%bcond_without	ocaml_opt		# build opt
+%bcond_without	ocaml_opt	# build opt (native code)
 
-%ifarch x32
+%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9
 %undefine	with_ocaml_opt
 %endif
 Summary:	OCaml functions to manipulate real file (POSIX like) and filename
 Summary(pl.UTF-8):	Funkcje OCamla do operacji na (posiksowych) plikach oraz nazwach plików
 Name:		ocaml-fileutils
 Version:	0.4.5
-Release:	3
+Release:	4
 License:	LGPL v2.1+ with OCaml linking exception
 Group:		Libraries
 Source0:	http://forge.ocamlcore.org/frs/download.php/1194/%{name}-%{version}.tar.gz
@@ -19,6 +19,7 @@ BuildRequires:	ocaml >= 3.04-7
 BuildRequires:	ocaml-findlib
 BuildRequires:	ocaml-ounit
 %requires_eq	ocaml
+Obsoletes:	ocaml-fileutils-devel < 0.4.5-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,20 +27,6 @@ Functions to manipulate real file (POSIX like) and filename.
 
 %description -l pl.UTF-8
 Funkcje do operacji na (posiksowych) plikach oraz nazwach plików.
-
-%package devel
-Summary:	Development files for OCaml fileutils package
-Summary(pl.UTF-8):	Pliki programistyczne pakietu fileutils dla OCamla
-Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-
-%description devel
-This package contains libraries and signature files for developing
-applications that use OCaml fileutils package.
-
-%description devel -l pl.UTF-8
-Ten pakiet zawiera biblioteki i pliki sygnatur do tworzenia aplikacji
-wykorzystujących pakiet OCamla fileutils.
 
 %prep
 %setup -q
@@ -73,16 +60,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS.txt CHANGELOG.txt README.txt TODO.txt
 %dir %{_libdir}/ocaml/fileutils
-%{_libdir}/ocaml/fileutils/*.cm[ai]
-%{_libdir}/ocaml/site-lib/fileutils
-
-%files devel
-%defattr(644,root,root,755)
+%{_libdir}/ocaml/fileutils/*.cmi
+%{_libdir}/ocaml/fileutils/fileutils*.cma
 %if %{with ocaml_opt}
-%{_libdir}/ocaml/fileutils/*.a
 %{_libdir}/ocaml/fileutils/*.cmx
-%{_libdir}/ocaml/fileutils/*.cmx[as]
+%{_libdir}/ocaml/fileutils/fileutils*.a
+%{_libdir}/ocaml/fileutils/fileutils*.cmxa
+%{_libdir}/ocaml/fileutils/fileutils*.cmxs
 %endif
+%{_libdir}/ocaml/site-lib/fileutils
 # doc?
-%{_libdir}/ocaml/fileutils/*.ml
-%{_libdir}/ocaml/fileutils/*.mli
+%{_libdir}/ocaml/fileutils/FilePath.mli
+%{_libdir}/ocaml/fileutils/FileUtil*.ml
