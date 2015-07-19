@@ -8,12 +8,12 @@
 Summary:	OCaml functions to manipulate real file (POSIX like) and filename
 Summary(pl.UTF-8):	Funkcje OCamla do operacji na (posiksowych) plikach oraz nazwach plików
 Name:		ocaml-fileutils
-Version:	0.4.5
-Release:	4
+Version:	0.5.0
+Release:	1
 License:	LGPL v2.1+ with OCaml linking exception
 Group:		Libraries
-Source0:	http://forge.ocamlcore.org/frs/download.php/1194/%{name}-%{version}.tar.gz
-# Source0-md5:	2fa2782374c2210f2584fe02814bb343
+Source0:	http://forge.ocamlcore.org/frs/download.php/1531/%{name}-%{version}.tar.gz
+# Source0-md5:	7d767cdfec85c846bd1d6f75a73abb01
 URL:		http://forge.ocamlcore.org/projects/ocaml-fileutils
 BuildRequires:	ocaml >= 3.04-7
 BuildRequires:	ocaml-findlib
@@ -71,4 +71,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/site-lib/fileutils
 # doc?
 %{_libdir}/ocaml/fileutils/FilePath.mli
+%{_libdir}/ocaml/fileutils/FileUtil.mli
 %{_libdir}/ocaml/fileutils/FileUtil*.ml
