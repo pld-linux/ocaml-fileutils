@@ -2,18 +2,18 @@
 # Conditional build:
 %bcond_without	ocaml_opt	# build opt (native code)
 
-%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9
+%ifnarch %{ix86} %{x8664} %{arm} aarch64 ppc sparc sparcv9
 %undefine	with_ocaml_opt
 %endif
 Summary:	OCaml functions to manipulate real file (POSIX like) and filename
 Summary(pl.UTF-8):	Funkcje OCamla do operacji na (posiksowych) plikach oraz nazwach plików
 Name:		ocaml-fileutils
-Version:	0.5.0
-Release:	5
+Version:	0.5.2
+Release:	1
 License:	LGPL v2.1+ with OCaml linking exception
 Group:		Libraries
-Source0:	http://forge.ocamlcore.org/frs/download.php/1531/%{name}-%{version}.tar.gz
-# Source0-md5:	7d767cdfec85c846bd1d6f75a73abb01
+Source0:	http://forge.ocamlcore.org/frs/download.php/1695/%{name}-%{version}.tar.gz
+# Source0-md5:	ea653868e5e7a4a9316f7338b971df62
 URL:		http://forge.ocamlcore.org/projects/ocaml-fileutils
 BuildRequires:	ocaml >= 3.04-7
 BuildRequires:	ocaml-findlib
@@ -62,10 +62,13 @@ install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/{site-lib/fileutils,stublibs}
 %{__make} install \
 	OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 
-mv $RPM_BUILD_ROOT%{_libdir}/ocaml/fileutils/META $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/fileutils
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/ocaml/fileutils/META $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/fileutils
 cat >> $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/fileutils/META <<EOF
 directory = "+fileutils"
 EOF
+
+# for debugging?
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/ocaml/fileutils/*.{annot,cmt,cmti}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
