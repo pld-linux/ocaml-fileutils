@@ -1,0 +1,18 @@
+--- ocaml-fileutils-0.6.3/fileutils.opam~	2020-07-11 23:21:55.000000000 +0200
++++ ocaml-fileutils-0.6.3/fileutils.opam	2021-03-30 21:57:08.685770245 +0200
+@@ -16,7 +16,6 @@
+   "ocaml" {>= "4.03"}
+   "base-unix"
+   "base-bytes"
+-  "stdlib-shims"
+   "dune" {>= "1.11.0"}
+   "ounit" {with-test & >= "2.0.0"}
+ ]
+--- ocaml-fileutils-0.6.3/src/lib/fileutils/dune~	2020-07-11 23:21:55.000000000 +0200
++++ ocaml-fileutils-0.6.3/src/lib/fileutils/dune	2021-03-30 21:57:45.986277768 +0200
+@@ -30,4 +30,4 @@
+     fileUtilWHICH
+     unixPath
+     win32Path)
+-  (libraries unix bytes stdlib-shims))
++  (libraries unix bytes))
