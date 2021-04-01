@@ -12,7 +12,7 @@ Summary:	OCaml functions to manipulate real file (POSIX like) and filename
 Summary(pl.UTF-8):	Funkcje OCamla do operacji na (posiksowych) plikach oraz nazwach plików
 Name:		ocaml-fileutils
 Version:	0.6.3
-Release:	1
+Release:	2
 License:	LGPL v2.1+ with OCaml linking exception
 Group:		Libraries
 Source0:	https://github.com/gildor478/ocaml-fileutils/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -54,7 +54,7 @@ dune build --verbose
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/{site-lib/fileutils,stublibs}
+install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/stublibs
 
 dune install --destdir=$RPM_BUILD_ROOT
 
@@ -72,7 +72,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ocaml/fileutils/str/*.cmxs
 %endif
 %{_libdir}/ocaml/fileutils/fileutils*.cma
-%{_libdir}/ocaml/site-lib/fileutils
 
 %files devel
 %defattr(644,root,root,755)
